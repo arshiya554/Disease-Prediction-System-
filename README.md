@@ -3,6 +3,19 @@
 A machine learning-based web application developed using **Python and Flask** that predicts the likelihood of different diseases based on user-provided health parameters.
 
 The system provides a simple web interface where users can enter relevant health information and receive a prediction from the machine learning model.
+## 📸 Project Screenshots
+
+### 🏠 Registration
+![Registration Page](screenshots/register.png)
+
+### 📊 Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### 🩺 Disease Prediction
+![Disease Prediction](screenshots/prediction.png)
+
+### 📈 Prediction Analytics
+![Prediction Analytics](screenshots/history.png)
 
 ## ✨ Features
 
