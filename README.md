@@ -6,7 +6,7 @@ The system provides a simple web interface where users can enter relevant health
 ## 📸 Project Screenshots
 
 ### 🏠 Registration
-![Registration Page](screenshots/register.png)
+![Registration Page](screenshots/registration.png)
 
 ### 📊 Dashboard
 ![Dashboard](screenshots/dashboard.png)
