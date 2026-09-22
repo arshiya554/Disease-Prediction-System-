@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Login | MediPredict AI{% endblock %}
+
+{% block content %}
+
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+
+    <div class="row w-100 justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card predict-card">
+
+                <div class="text-center mb-4">
+
+                    <i class="fa-solid fa-heart-pulse text-primary fa-3x mb-3"></i>
+
+                    <h2 class="page-title">Welcome Back</h2>
+
+                    <p class="text-muted">
+                        Sign in to access your healthcare dashboard
+                    </p>
+
+                </div>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            placeholder="Enter your username"
+                            required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Password</label>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            required>
+                    </div>
+{% if error %}
+<div class="alert alert-danger">
+    {{ error }}
+</div>
+{% endif %}
+                    <button type="submit" class="btn custom-btn w-100">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i>
+                        Login
+                    </button>
+
+                </form>
+
+                <p class="text-center mt-4 mb-0">
+
+                    Don't have an account?
+
+                    <a href="/register" class="text-primary text-decoration-none fw-bold">
+                        Register
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

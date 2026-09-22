@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/dashboard">
+            <i class="fa-solid fa-heart-pulse me-2"></i>
+            MediPredict AI
+        </a>
+
+        <div class="d-flex gap-2">
+
+            <a href="/dashboard" class="btn btn-outline-light btn-sm">
+                Dashboard
+            </a>
+
+            <a href="/predict" class="btn btn-outline-light btn-sm">
+                Predict
+            </a>
+
+            <a href="/logout" class="btn btn-danger btn-sm">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+</nav>
+
+<div class="container py-5">
+
+    <div class="card result-card shadow-lg border-0 p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+            <div>
+                <h2 class="page-title mb-1">
+                    Prediction History
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Welcome, {{ username }}
+                </p>
+            </div>
+
+            <div class="w-25">
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control"
+                    placeholder="Search disease...">
+            </div>
+
+        </div>
+
+        {% if history %}
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+
+                <h4 class="mb-3">
+                    <i class="fa-solid fa-chart-pie text-primary"></i>
+                    Prediction Analytics
+                </h4>
+
+                <div class="chart-container">
+    <canvas id="diseaseChart"></canvas>
+</div>
+
+            </div>
+        </div>
+        <div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+
+        <h4 class="mb-3">
+            <i class="fa-solid fa-chart-column text-success"></i>
+            Disease Frequency
+        </h4>
+
+        <div class="bar-chart-container">
+            <canvas id="barChart"></canvas>
+        </div>
+
+    </div>
+</div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle" id="historyTable">
+
+                <thead class="table-primary">
+
+                    <tr>
+                        <th>Symptoms</th>
+                        <th>Disease</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for row in history %}
+
+                    <tr>
+                        <td>{{ row[0] }}</td>
+
+                        <td>{{ row[1] }}</td>
+
+                        <td>
+                            <span class="badge bg-primary fs-6">
+                                Predicted
+                            </span>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="text-end mt-3">
+
+            <a href="/delete_history"
+               class="btn btn-outline-danger"
+               onclick="return confirm('Delete all prediction history?')">
+
+                <i class="fa-solid fa-trash"></i>
+                Clear History
+
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <i class="fa-solid fa-file-circle-xmark fa-4x text-muted mb-3"></i>
+
+            <h4>No predictions yet</h4>
+
+            <p class="text-muted">
+                Start by predicting your first disease.
+            </p>
+
+            <a href="/predict" class="btn custom-btn">
+                Predict Now
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.getElementById("searchInput")?.addEventListener("keyup", function() {
+
+    const value = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#historyTable tbody tr");
+
+    rows.forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(value)
+            ? ""
+            : "none";
+    });
+
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% if diseases and counts %}
+
+<script>
+const diseases = {{ diseases | tojson }};
+const counts = {{ counts | tojson }};
+
+const ctx = document.getElementById('diseaseChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+
+    data: {
+        labels: diseases,
+
+        datasets: [{
+            data: counts
+        }]
+    },
+
+    options: {
+        responsive: true,
+
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
+<script>
+const barCtx = document.getElementById('barChart');
+
+new Chart(barCtx, {
+    type: 'bar',
+
+    data: {
+        labels: diseases,
+
+        datasets: [{
+            label: 'Predictions',
+            data: counts,
+            borderWidth: 1
+        }]
+    },
+
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
+
+{% endif %}
+
+{% endblock %}

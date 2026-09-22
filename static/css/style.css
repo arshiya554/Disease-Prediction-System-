@@ -1,0 +1,156 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f8fb;
+    min-height: 100vh;
+}
+
+.navbar {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.page-container {
+    padding: 50px 0;
+}
+
+.predict-card,
+.result-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.predict-card {
+    padding: 35px;
+}
+
+.result-card {
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.page-title {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.custom-btn {
+    background: linear-gradient(90deg, #2563eb, #14b8a6);
+    border: none;
+    color: white;
+    border-radius: 12px;
+    padding: 12px 25px;
+    font-weight: 600;
+}
+
+.custom-btn:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.disease-name {
+    color: #2563eb;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.precaution-item {
+    padding: 10px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.disclaimer {
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+.table {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.badge {
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #eaf6ff, #d7f0ff);
+}
+
+.hero-section {
+    overflow: hidden;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.2;
+}
+
+.hero-text {
+    color: #6b7280;
+    font-size: 1.2rem;
+    max-width: 550px;
+    text-align: justify;
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 420px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.main-card {
+    text-align: justify;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    border-radius: 12px;
+    padding: 12px 30px;
+}
+
+.btn-outline-primary {
+    border-radius: 12px;
+    padding: 12px 30px;
+}
+.hero-icon {
+    font-size: 140px;
+    color: #0d6efd;
+}
+.chart-container {
+    width: 350px;
+    height: 350px;
+    margin: 0 auto;
+}
+.bar-chart-container {
+    height: 350px;
+}

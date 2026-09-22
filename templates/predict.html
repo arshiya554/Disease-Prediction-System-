@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Disease{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/dashboard">
+            <i class="fa-solid fa-heart-pulse me-2"></i>
+            MediPredict AI
+        </a>
+
+        <div class="d-flex gap-2">
+
+            <a href="/dashboard" class="btn btn-light btn-sm">
+                Dashboard
+            </a>
+
+            <a href="/history" class="btn btn-outline-light btn-sm">
+                History
+            </a>
+
+            <a href="/logout" class="btn btn-danger btn-sm">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+</nav>
+
+<div class="container page-container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card predict-card">
+
+                <h2 class="page-title mb-4">
+                    <i class="fa-solid fa-stethoscope text-primary"></i>
+                    Disease Prediction
+                </h2>
+                <form method="POST">
+
+    <label class="form-label fw-semibold mb-2">
+        Select Symptoms
+    </label>
+
+    <select
+    id="symptomSelect"
+    class="form-select"
+    name="symptoms"
+    multiple
+    required>
+
+    {% for symptom in symptoms_list %}
+        <option value="{{ symptom }}">
+            {{ symptom.replace("_", " ").title() }}
+        </option>
+    {% endfor %}
+
+</select>
+
+    <small class="text-muted">
+        Hold <strong>Ctrl</strong> (Windows) or <strong>Cmd</strong> (Mac) to select multiple symptoms.
+    </small>
+
+    <button class="btn custom-btn mt-4" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Predict Disease
+    </button>
+
+</form>
+
+            </div>
+
+            {% if disease %}
+
+            <div class="card result-card">
+
+                <h5 class="text-muted">Predicted Disease</h5>
+
+                <div class="disease-name mb-4">
+                    {{ disease }}
+                </div>
+                {% if confidence %}
+<div class="mb-4">
+    <span class="badge bg-success fs-6">
+        Confidence: {{ confidence }}%
+    </span>
+</div>
+{% endif %}
+
+                <h5>Description</h5>
+
+                <p>{{ description }}</p>
+
+                <h5 class="mt-4">Precautions</h5>
+
+                {% for item in precautions %}
+
+                    {% if item %}
+
+                    <div class="precaution-item">
+                        <i class="fa-solid fa-circle-check text-success me-2"></i>
+                        {{ item }}
+                    </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                <div class="disclaimer">
+
+                    <strong>Medical Disclaimer:</strong>
+
+                    This prediction is generated using a machine learning model and should not replace professional medical advice.
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    new Choices("#symptomSelect", {
+        removeItemButton: true,
+        searchEnabled: true,
+        placeholder: true,
+        placeholderValue: "Search and select symptoms",
+        searchPlaceholderValue: "Type a symptom...",
+        noResultsText: "No symptom found",
+        itemSelectText: ""
+    });
+
+});
+</script>
+{% endblock %}
